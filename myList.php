@@ -41,20 +41,33 @@ class myList
             }
         }
     }
+    public function numberOfSame($listItem){
+        $numOfSame = 0;
+        for($i=0; $i < count($this->list); $i++){
+            if(@$this->list[$i][0] === $listItem){
+                $numOfSame++;
+            }
+        }
+        return $numOfSame;
+    }
     public function deleteItem($listItem){
-        if (!in_array($listItem, $this->list)){
-            return false;
-        }
-        else{
-         #   array_search();
-        }
+         for($i=0; $i < count($this->list); $i++){
+              if($this->list[$i][0] === $listItem){
+                   unset($this->list[$i]);
+                   break;
+              }
+         }
+         #not finished yet
     }
 }
 
-#$newList = new myList();
-#$newList->addToEnd("aaa");
-#$newList->addToStart("bbb");
-#$newList->addToStart("ccc");
-#$newList->addToEnd("ddd");
+/*$newList = new myList();
+$newList->addToEnd("aaa");
+$newList->addToStart("bbb");
+$newList->addToStart("aaa");
+$newList->addToEnd("ddd");
+$newList->deleteItem("aaa");
+
 #var_dump($newList->isEmpty());
-#var_dump($newList->list);
+var_dump($newList->numberOfSame('aaa'));
+var_dump($newList->list);*/
