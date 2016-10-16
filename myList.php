@@ -13,7 +13,7 @@ class myList
     }
     public function addToEnd($listItem){
         if(!$this->isEmpty()){
-            $this->list[count($this->list) - 1][1] = $listItem;
+             $this->list[count($this->list) - 1][1] = $listItem;
         }
         $arr[] = $listItem;
         $arr[] = 0;
@@ -43,21 +43,29 @@ class myList
             array_shift($this->list);
             return true;
         }
-        elseif ($this->list[count($this->list) - 1][0] === $listItem){
-            $this->list[count($this->list) - 2][1] = 0;
+        elseif (end($this->list)[0] === $listItem){
+            $arrkeys = array_keys($this->list);
+            $key = array_search(end($this->list), $this->list);
+            $key2 = array_search($key, $arrkeys);
+            $this->list[$arrkeys[$key2 - 1]][1] = 0;
             array_pop($this->list);
             return true;
         }
         else {
-            for ($i = 0; $i < count($this->list); $i++) {
-                if ($this->list[$i][0] === $listItem) {
-                    $this->list[$i - 1][1] = $this->list[$i + 1][0];
-                    unset($this->list[$i]);
+            $arrkeys = array_keys($this->list);
+            print_r($arrkeys);
+            foreach ($this->list as $value) {
+                if ($value[0] === $listItem) {
+                    print_r($value);
+                    $key = array_search($value, $this->list);
+                    $key2 = array_search($key, $arrkeys);
+                    $this->list[$arrkeys[$key2 - 1]][1] = $value[1];
+                    unset($this->list[$key]);
                     return true;
-                    #break;
                 }
             }
         }
         return false;
     }
 }
+
